@@ -17,95 +17,84 @@ Ini adalah proyek sederhana untuk belajar kolaborasi menggunakan Git & Android S
 - Git & GitHub
 
 ## Penjelasan Code Penting
-<androidx.constraintlayout.widget.ConstraintLayout> = Layout utama yang fleksibel dan bisa mengatur posisi elemen berdasarkan "batas" (constraint) atas, bawah, kiri, kanan.
+1.
+import android.os.Bundle = Digunakan untuk mengakses `Bundle`, yaitu objek yang digunakan untuk menyimpan data sementara saat `onCreate()` dijalankan.
+Mengimpor class-class tampilan dari widget Android yang digunakan di layout XML.
+import android.widget.Button Fungsinya Tombol yang bisa ditekan
+import android.widget.EditText Fungsinya Kolom input teks
+import android.widget.TextView Fungsinya Teks yang bisa ditampilkan di layar (statis/dinamis)
+import androidx.activity.enableEdgeToEdge =
+- Fungsi dari AndroidX yang memungkinkan desain layar penuh (edge-to-edge) agar UI lebih modern.
+- Menyembunyikan status bar/navigation bar jika ingin tampilan aplikasi penuh dari ujung ke ujung layar.
+import androidx.appcompat.app.AppCompatActivity = Mengimpor class AppCompatActivity, yaitu activity standar modern di Android.
+import androidx.core.view.ViewCompat = Utility untuk kompatibilitas tampilan, misalnya menambahkan padding sesuai sistem (status bar, navigation bar)
+import androidx.core.view.WindowInsetsCompat = Digunakan untuk mengelola ruang tampilan yang dipengaruhi sistem (misal status bar, keyboard, dll)
 
-android:layout_width="match_parent" → Lebarnya mengikuti ukuran layar.
+2.
+- private lateinit var inputName: EditText
+Menyimpan referensi ke EditText yang digunakan untuk input nama siswa.
 
-android:layout_height="match_parent" → Tingginya juga mengikuti layar.
+R.id.etNama di XML.
 
-android:background="#F5F5F5" → Warna latar abu-abu muda.
+- private lateinit var inputKelas: EditText
+Menyimpan referensi ke EditText untuk input kelas siswa.
 
-tools:context=".MainActivity" → Menandakan layout ini digunakan oleh MainActivity.
+R.id.etKelas di XML.
 
-<LinearLayout
-    android:orientation="vertical"
-    ... /> = Untuk menata semua elemen isi secara vertikal (atas ke bawah).
-    
-layout_width="0dp" → Artinya akan mengikuti lebar yang ditentukan oleh constraint (Start dan End ke parent).
+- private lateinit var btnSubmit: Button
+Menyimpan referensi ke Button yang ditekan untuk menampilkan hasil.
 
-layout_height="wrap_content" → Tingginya menyesuaikan isi.
+R.id.btnTampilkan di XML.
 
-android:background="@android:color/white" → Latar putih agar terlihat seperti kartu.
+- private lateinit var txtResult: TextView
+Menyimpan referensi ke TextView yang akan menampilkan hasil input setelah tombol ditekan.
 
-android:elevation="4dp" → Memberikan bayangan (efek 3D).
+R.id.tvHasil di XML.
 
-android:padding="24dp" → Jarak ke dalam agar isi tidak mepet.
+3. override fun onCreate
+- override
+Menandakan bahwa kamu sedang menimpa fungsi (onCreate) dari superclass (AppCompatActivity).
 
-<TextView
-    android:text="Form Biodata Siswa"
-    android:textAlignment="center"
-    ... /> = Menampilkan teks judul di tengah serta teks dibuat tebal dan besar
+- fun onCreate(savedInstanceState: Bundle?)
+Fungsi dengan 1 parameter savedInstanceState yang bisa menyimpan data saat rotasi layar, navigasi ulang, dsb.
 
-<EditText
-    android:hint="Masukkan Nama"
-    android:inputType="textPersonName"
-    ... /> = Untuk mengisi nama siswa.
+4. setContentView(R.layout.activity_main)
+adalah perintah utama dalam Android untuk menampilkan tampilan (layout XML) ke layar saat Activity dijalankan.
 
-hint: teks petunjuk sebelum diketik.
+5.
+1. inputName = findViewById(R.id.etNama)
+- Mencari komponen EditText yang memiliki ID etNama di XML.
+- Hasil pencarian disimpan dalam variabel inputName.
+- Sekarang kamu bisa membaca atau mengatur teks input dari inputName di Kotlin.
 
-inputType: khusus nama orang (huruf kapital otomatis).
+2. inputKelas = findViewById(R.id.etKelas)
+- Sama seperti di atas, tapi untuk EditText dengan ID etKelas.
 
-backgroundTint="#6200EE" → garis bawah berwarna ungu.
+3. btnSubmit = findViewById(R.id.btnTampilkan)
+- Menghubungkan tombol (Button) dari layout ke variabel btnSubmit.
+- Dengan ini kamu bisa memberi aksi ketika tombol ditekan menggunakan btnSubmit.setOnClickListener { ... }.
 
-<EditText
-    android:hint="Masukkan Kelas"
-    ... /> = Untuk mengisi kelas siswa. Sama seperti EditText sebelumnya, hanya berbeda hint dan inputType.
+4. txtResult = findViewById(R.id.tvHasil)
+- Menghubungkan TextView yang digunakan untuk menampilkan hasil input ke dalam variabel txtResult.
 
-<Button
-    android:text="Tampilkan"
-    android:backgroundTint="#03DAC5"
-    ... /> = Tombol yang akan ditekan untuk menampilkan biodata.
+6.
+1. btnSubmit.setOnClickListener { ... }
+- Fungsi ini akan menjalankan blok kode di dalam {} saat tombol ditekan.
+- Tombolnya diambil dari findViewById(R.id.btnTampilkan) sebelumnya.
+2. val nama = inputName.text.toString().trim()
+- Mengambil teks dari EditText inputName (input nama siswa).
+- text: mendapatkan teks dari EditText.
+- toString(): mengubah ke format String.
+- trim(): menghapus spasi kosong di awal dan akhir.
+3. val kelas = inputKelas.text.toString().trim()
+- Sama seperti di atas, tapi untuk input kelas siswa.
+4. val hasil = "Nama: $nama\nKelas: $kelas"
+- Membuat string hasil dari data yang diinputkan.
+- \n digunakan untuk pindah baris.
+5. txtResult.text = hasil
+- Menampilkan hasil ke TextView (tvHasil) di layar.
+- Teks akan langsung muncul begitu tombol ditekan.
 
-textAllCaps="false" → Huruf pada tombol tidak semua besar.
-
-layout_gravity="center" → Tombol di tengah secara horizontal.
-
-<TextView
-    android:id="@+id/tvHasil"
-    android:text=" "
-    ... /> = Tempat menampilkan hasil biodata setelah tombol ditekan.
-
-class MainActivity : AppCompatActivity() { = Artinya MainActivity adalah activity layar yang menggunakan fitur dari AppCompatActivity.
-
-private lateinit var inputName: EditText
-private lateinit var inputKelas: EditText
-private lateinit var btnSubmit: Button
-private lateinit var txtResult: TextView
-lateinit: artinya variabel akan di-inisialisasi nanti, bukan langsung saat dideklarasikan.
-Digunakan untuk menyambungkan elemen tampilan XML dengan Kotlin (findViewById).
-
-override fun onCreate(savedInstanceState: Bundle?) { = Fungsi yang pertama kali dijalankan saat activity dibuka.
-
-enableEdgeToEdge()
-ViewCompat.setOnApplyWindowInsetsListener(...)
-Ini bagian untuk menyesuaikan tampilan layar penuh dan memastikan UI tidak tertimpa oleh status bar atau navigation bar.
-
-inputName = findViewById(R.id.etNama)
-inputKelas = findViewById(R.id.etKelas)
-btnSubmit = findViewById(R.id.btnTampilkan)
-txtResult = findViewById(R.id.tvHasil)
-Menghubungkan komponen dari XML dengan variabel Kotlin.
-
-btnSubmit.setOnClickListener {
-    val nama = inputName.text.toString().trim()
-    val kelas = inputKelas.text.toString().trim()
-    val hasil = "Nama: $nama\nKelas: $kelas"
-    txtResult.text = hasil
-}
-Ambil input dari EditText → .text.toString().trim()
-trim() untuk menghapus spasi di depan dan belakang.
-Gabungkan hasil ke dalam satu string.
-Tampilkan hasil ke TextView (tvHasil).
 
 ##
 <activity
