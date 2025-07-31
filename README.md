@@ -110,7 +110,8 @@ Tampilkan hasil ke TextView (tvHasil).
 
 
 
-
-
+## Screenshoot
+<img width="275" height="564" alt="image" src="https://github.com/user-attachments/assets/792d6e44-2bce-47d8-aaaa-9da35c8d81ca" />
+<img width="278" height="562" alt="image" src="https://github.com/user-attachments/assets/ca6bd3f4-6700-4db1-aaf8-222434374774" />
 
 
