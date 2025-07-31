@@ -98,33 +98,59 @@ adalah perintah utama dalam Android untuk menampilkan tampilan (layout XML) ke l
 
 ##
 <activity
-            android:name=".activity_splash"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
+            android:name=".activity_splash"  → Menambahkan halaman baru bernama activity_splash ke dalam aplikasi.
+
+            android:exported="true"> → Artinya aktivitas ini bisa dijalankan dari luar aplikasi
+            
+            <intent-filter> → Digunakan untuk menjadikan halaman ini sebagai halaman awal saat aplikasi dibuka.
+            
+                <action android:name="android.intent.action.MAIN" /> → Menandai ini sebagai aktivitas utama aplikasi.
+                
+                <category android:name="android.intent.category.LAUNCHER" /> → Menjadikan ikon aplikasi membuka halaman ini saat diklik.
+                
             </intent-filter>
+            
         </activity>
+        
         <activity
+        
             android:name=".MainActivity"
+            
             android:exported="true" />
+
+Baris ini memberitahu Android bahwa activity_splash adalah halaman pertama (launcher) saat aplikasi dijalankan.
+intent-filter dengan MAIN dan LAUNCHER digunakan untuk menjadikan SplashActivity sebagai titik masuk aplikasi.
+MainActivity tetap dideklarasikan, tapi tidak dijadikan launcher.
+
 ##
 Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3000)
+
+            val intent = Intent(this, MainActivity::class.java) → Membuat intent (perintah) untuk pindah dari SplashActivity ke MainActivity.
+            
+            startActivity(intent) → Menjalankan MainActivity.
+            
+            finish() → Menutup SplashActivity supaya tidak bisa dikembalikan dengan tombol Back.
+            
+        }, 3000) → Menjalankan kode setelah delay 3000 milidetik (3 detik).
+
+
 ##
-<ImageView
-        android:id="@+id/logoSMK"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_smk"
+<ImageView → Digunakan untuk menampilkan gambar di layar.
+
+        android:id="@+id/logoSMK" → Nama ID komponen ini agar bisa dipanggil di Kotlin.
+        
+        android:layout_width="200dp" → Ukuran gambar 200dp x 200dp.
+        android:layout_height="200dp" →
+        android:src="@drawable/logo_smk" → Gambar yang ditampilkan berasal dari file drawable bernama logo_smk.png.
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+ConstraintLayout digunakan, jadi keempat sisi di-constraint ke parent untuk posisi tepat di tengah (centered).
+
 ##
 ## Screenshoot
 
@@ -132,4 +158,7 @@ Handler(Looper.getMainLooper()).postDelayed({
 <img width="275" height="562" alt="image" src="https://github.com/user-attachments/assets/792d6e44-2bce-47d8-aaaa-9da35c8d81ca" />
 <img width="275" height="562" alt="image" src="https://github.com/user-attachments/assets/ca6bd3f4-6700-4db1-aaf8-222434374774" />
 
+Gambar-gambar menunjukkan:
+Tampilan logo SMK saat splash screen.
+Setelah 3 detik, layar berpindah ke MainActivity.
 
