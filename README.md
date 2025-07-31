@@ -107,8 +107,19 @@ trim() untuk menghapus spasi di depan dan belakang.
 Gabungkan hasil ke dalam satu string.
 Tampilkan hasil ke TextView (tvHasil).
 
-
-
+##
+<activity
+            android:name=".activity_splash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+##
 
 ## Screenshoot
 <img width="275" height="564" alt="image" src="https://github.com/user-attachments/assets/792d6e44-2bce-47d8-aaaa-9da35c8d81ca" />
